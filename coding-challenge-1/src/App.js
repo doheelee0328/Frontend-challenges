@@ -1,13 +1,9 @@
-import { Stars } from './components'
+import { Homepage } from './pages'
 
 function App() {
   return (
-    <div className='star-container'>
-      <Stars />
-      <Stars />
-      <Stars />
-      <Stars />
-      <Stars />
+    <div className='homepage-container'>
+      <Homepage />
     </div>
   )
 }
