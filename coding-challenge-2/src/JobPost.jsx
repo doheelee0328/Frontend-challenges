@@ -31,6 +31,7 @@ const JobPost = () => {
 
   useEffect(() => {
     jobPostHandler()
+    // eslint-disable-next-line
   }, [])
 
   const informationJobPost = () => {
