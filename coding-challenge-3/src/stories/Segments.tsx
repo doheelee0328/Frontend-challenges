@@ -18,6 +18,7 @@ const digitValues = (value: number, numberOfDigits: number) => {
   console.log(digitNumber)
 
   const shouldRenderDigits = numberOfDigits ? [...digitNumber] : []
+  //
 
   return [...shouldRenderDigits]
 }
@@ -32,7 +33,7 @@ const decimalValues = (value: number, numberOfDecimals: number) => {
   return [...shouldRenderDecimals]
 }
 
-const isSegmentVisible = (segment: number, value: number) => {
+const isSegmentVisible = (value: number, segment: number) => {
   const segmentTable = {
     0: [0, 1, 4, 6, 5, 2],
     1: [1, 4],
