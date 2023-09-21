@@ -1,6 +1,7 @@
 import './App.css'
 import React, { useState } from 'react'
 import Practice from './Practice.tsx'
+import Light from './stories/Light.tsx'
 
 function App() {
   const [addNum1, setAddNum1] = useState<number | string>('')
@@ -39,6 +40,7 @@ function App() {
       <button onClick={submitHandler}>Submit</button>
       {typeof together === 'number' ? together : ''}
       <Practice />
+      <Light yellow={'yellow'} />
     </div>
   )
 }

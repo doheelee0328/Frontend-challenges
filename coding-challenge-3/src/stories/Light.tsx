@@ -5,7 +5,7 @@ interface LightProps {
 }
 
 const Light = ({ yellow }: LightProps) => {
-  return <div style={{ backgroundColor: yellow }}>Hello</div>
+  return <div style={{ backgroundColor: yellow }}>Why</div>
 }
 
 export default Light

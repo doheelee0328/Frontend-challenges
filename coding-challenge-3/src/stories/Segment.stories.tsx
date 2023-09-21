@@ -20,6 +20,8 @@ type Story = StoryObj<typeof meta>
 // inside this component, we want a base
 export const Segment: Story = {
   args: {
-    value: 0,
+    value: 21.5,
+    numberOfDecimals: 0,
+    numberOfDigits: 0,
   },
 }
