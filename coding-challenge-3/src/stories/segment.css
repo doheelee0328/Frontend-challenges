@@ -13,3 +13,22 @@
 .segment-hidden {
   border: none;
 }
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border: 1px solid black;
+  position: absolute;
+  top: 10rem;
+}
+
+.segments-container {
+  display: flex;
+  gap: 3rem;
+}
+
+.decimal-array {
+  margin-left: 60px;
+  display: flex;
+  gap: 3rem;
+}

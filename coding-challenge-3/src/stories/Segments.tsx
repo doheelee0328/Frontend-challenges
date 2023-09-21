@@ -9,44 +9,53 @@ interface ValueProps {
   numberOfDecimals: number
 }
 
-const formattedValues = (
-  value: number,
-  numberOfDigits: number,
-  numberOfDecimals: number
-) => {
-  const format = value.toFixed(numberOfDecimals)
-  const valuedString = format.toString()
-  const [digit, decimal] = valuedString.split('.')
+const digitValues = (value: number, numberOfDigits: number) => {
+  const valuedString = value.toString()
+  const digit = valuedString.split('.')[0]
 
-  const digitNumber = digit.padStart(numberOfDigits, '0')
-  const decimalNumber = (decimal || '').padEnd(numberOfDecimals, '0')
+  const digitNumber = digit.padStart(numberOfDigits, '0').split('')
 
-  return [digitNumber, decimalNumber]
+  console.log(digitNumber)
+
+  const shouldRenderDigits = numberOfDigits ? [...digitNumber] : []
+
+  return [...shouldRenderDigits]
+}
+
+const decimalValues = (value: number, numberOfDecimals: number) => {
+  const valuedString = value.toString()
+  const decimal = valuedString.split('.')[1]
+  const decimalNumber = (decimal || '').padEnd(numberOfDecimals, '0').split('')
+
+  const shouldRenderDecimals = numberOfDecimals ? [...decimalNumber] : []
+
+  return [...shouldRenderDecimals]
 }
 
 const isSegmentVisible = (segment: number, value: number) => {
   const segmentTable = {
-    0: [0],
+    0: [0, 1, 4, 6, 5, 2],
     1: [1, 4],
-    2: [5],
+    2: [0, 1, 3, 5, 6],
     3: [0, 1, 3, 4, 6],
-    4: [2, 1, 3, 4],
+    4: [2, 3, 4, 1],
     5: [0, 2, 3, 4, 6],
     6: [0, 2, 3, 4, 5, 6],
     7: [0, 1, 4],
     8: [0, 1, 2, 3, 4, 5, 6],
     9: [0, 1, 2, 3, 4],
   }
+  console.log(segmentTable[segment].includes(value))
   return segmentTable[segment].includes(value)
+
   // Check if the segment, which can be either 0 or 1, is visible for the given value
 }
 
-const Segments = ({ value, numberOfDecimals, numberOfDigits }: ValueProps) => {
-  const [digitSegments, decimalSegments] = formattedValues(
-    value,
-    numberOfDigits,
-    numberOfDecimals
-  )
+const Segments = ({ value, numberOfDigits, numberOfDecimals }: ValueProps) => {
+  const digitSegments = digitValues(value, numberOfDigits)
+  const decimalSegments = decimalValues(value, numberOfDecimals)
+
+  console.log(digitSegments, decimalSegments)
 
   const renderDigit = (digit: number) => {
     return (
@@ -56,7 +65,7 @@ const Segments = ({ value, numberOfDecimals, numberOfDigits }: ValueProps) => {
             <td></td>
             <td
               className={
-                isSegmentVisible(0, digit)
+                isSegmentVisible(digit, 0)
                   ? 'segment-visible-horizontal'
                   : 'segment-hidden'
               }
@@ -66,7 +75,7 @@ const Segments = ({ value, numberOfDecimals, numberOfDigits }: ValueProps) => {
           <tr>
             <td
               className={
-                isSegmentVisible(1, digit)
+                isSegmentVisible(digit, 2)
                   ? 'segment-visible-vertical'
                   : 'segment-hidden'
               }
@@ -74,7 +83,7 @@ const Segments = ({ value, numberOfDecimals, numberOfDigits }: ValueProps) => {
             <td></td>
             <td
               className={
-                isSegmentVisible(2, digit)
+                isSegmentVisible(digit, 1)
                   ? 'segment-visible-vertical'
                   : 'segment-hidden'
               }
@@ -84,7 +93,7 @@ const Segments = ({ value, numberOfDecimals, numberOfDigits }: ValueProps) => {
             <td></td>
             <td
               className={
-                isSegmentVisible(3, digit)
+                isSegmentVisible(digit, 3)
                   ? 'segment-visible-horizontal'
                   : 'segment-hidden'
               }
@@ -94,7 +103,7 @@ const Segments = ({ value, numberOfDecimals, numberOfDigits }: ValueProps) => {
           <tr>
             <td
               className={
-                isSegmentVisible(5, digit)
+                isSegmentVisible(digit, 5)
                   ? 'segment-visible-vertical'
                   : 'segment-hidden'
               }
@@ -102,7 +111,7 @@ const Segments = ({ value, numberOfDecimals, numberOfDigits }: ValueProps) => {
             <td></td>
             <td
               className={
-                isSegmentVisible(4, digit)
+                isSegmentVisible(digit, 4)
                   ? 'segment-visible-vertical'
                   : 'segment-hidden'
               }
@@ -112,7 +121,7 @@ const Segments = ({ value, numberOfDecimals, numberOfDigits }: ValueProps) => {
             <td></td>
             <td
               className={
-                isSegmentVisible(6, digit)
+                isSegmentVisible(digit, 6)
                   ? 'segment-visible-horizontal'
                   : 'segment-hidden'
               }
@@ -132,7 +141,7 @@ const Segments = ({ value, numberOfDecimals, numberOfDigits }: ValueProps) => {
             <td></td>
             <td
               className={
-                isSegmentVisible(0, decimal)
+                isSegmentVisible(decimal, 0)
                   ? 'segment-visible-horizontal'
                   : 'segment-hidden'
               }
@@ -142,7 +151,7 @@ const Segments = ({ value, numberOfDecimals, numberOfDigits }: ValueProps) => {
           <tr>
             <td
               className={
-                isSegmentVisible(2, decimal)
+                isSegmentVisible(decimal, 2)
                   ? 'segment-visible-vertical'
                   : 'segment-hidden'
               }
@@ -150,7 +159,7 @@ const Segments = ({ value, numberOfDecimals, numberOfDigits }: ValueProps) => {
             <td></td>
             <td
               className={
-                isSegmentVisible(1, decimal)
+                isSegmentVisible(decimal, 1)
                   ? 'segment-visible-vertical'
                   : 'segment-hidden'
               }
@@ -160,7 +169,7 @@ const Segments = ({ value, numberOfDecimals, numberOfDigits }: ValueProps) => {
             <td></td>
             <td
               className={
-                isSegmentVisible(3, decimal)
+                isSegmentVisible(decimal, 3)
                   ? 'segment-visible-horizontal'
                   : 'segment-hidden'
               }
@@ -170,7 +179,7 @@ const Segments = ({ value, numberOfDecimals, numberOfDigits }: ValueProps) => {
           <tr>
             <td
               className={
-                isSegmentVisible(5, decimal)
+                isSegmentVisible(decimal, 5)
                   ? 'segment-visible-vertical'
                   : 'segment-hidden'
               }
@@ -178,7 +187,7 @@ const Segments = ({ value, numberOfDecimals, numberOfDigits }: ValueProps) => {
             <td></td>
             <td
               className={
-                isSegmentVisible(4, decimal)
+                isSegmentVisible(decimal, 4)
                   ? 'segment-visible-vertical'
                   : 'segment-hidden'
               }
@@ -188,7 +197,7 @@ const Segments = ({ value, numberOfDecimals, numberOfDigits }: ValueProps) => {
             <td></td>
             <td
               className={
-                isSegmentVisible(6, decimal)
+                isSegmentVisible(decimal, 6)
                   ? 'segment-visible-horizontal'
                   : 'segment-hidden'
               }
@@ -200,22 +209,20 @@ const Segments = ({ value, numberOfDecimals, numberOfDigits }: ValueProps) => {
     )
   }
 
-  const digitArray = digitSegments.split('').map(Number)
-  const decimalArray = decimalSegments.split('').map(Number)
+  const digitArray = digitSegments.map(Number) // 21
+  const decimalArray = decimalSegments.map(Number)
+
+  // console.log(digitArray)
 
   return (
-    <div>
-      {digitSegments === '0'
-        ? ''
-        : digitArray.map((digit) => renderDigit(digit))}
-      {decimalSegments === '0' ? (
-        ''
-      ) : (
-        <>
-          <div>.</div>
-          {decimalArray.map((decimal) => renderDecimal(decimal))}
-        </>
-      )}
+    <div className='segments-container'>
+      {digitArray.map((digit) => renderDigit(digit))}
+      <div>
+        {numberOfDecimals ? <div className='dot'></div> : ''}
+        <div className='decimal-array'>
+          {decimalArray.map((digit) => renderDecimal(digit))}
+        </div>
+      </div>
     </div>
   )
 }
