@@ -4,13 +4,13 @@ type AuthenticationState = {
   isAuthenticated: boolean
 }
 
-const initialAuthrState: AuthenticationState = {
+const initialAuthState: AuthenticationState = {
   isAuthenticated: false,
 }
 
 const authSlice = createSlice({
   name: 'auth',
-  initialState: initialAuthrState,
+  initialState: initialAuthState,
   reducers: {
     isLogin(state) {
       state.isAuthenticated = true
@@ -21,6 +21,6 @@ const authSlice = createSlice({
   },
 })
 
-export const CounterSliceAction = authSlice.actions
+export const AuthSliceAction = authSlice.actions
 
 export default authSlice.reducer

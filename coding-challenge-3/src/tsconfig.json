@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "jsx": "react",
+    "target": "es2022",
+    "moduleResolution": "bundler",
+    "customConditions": ["my-condition"],
+    "noEmit": true,
+    "allowImportingTsExtensions": true
+  }
+}
