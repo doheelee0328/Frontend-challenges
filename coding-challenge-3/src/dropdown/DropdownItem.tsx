@@ -1,4 +1,5 @@
 import React from 'react'
+import './dropdown.css'
 // import { Link } from 'react-router-dom' // Import Link from react-router-dom
 
 interface FamilyProps {
@@ -14,17 +15,11 @@ const DropdownItem = ({
   description,
   fontSize,
   openHandler,
-  isToggled,
 }: FamilyProps) => {
   return (
-    <div>
+    <div onClick={openHandler} className='container'>
       <h1 style={{ fontSize: `${fontSize}px` }}> {name}</h1>
       <p>{description && description}</p>
-      {isToggled ? ( // Check if the item should be displayed
-        <button onClick={openHandler}>Close</button>
-      ) : (
-        <a href='./dohee'>Go to {name}</a> // Use Link for navigation
-      )}
     </div>
   )
 }
