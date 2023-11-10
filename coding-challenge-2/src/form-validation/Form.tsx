@@ -37,15 +37,19 @@ const Form = () => {
 
   const handleUsernameChange = (e) => {
     const newName = e.target.value
+
+    let errorMessage = ''
+
+    if (newName.length === 0) {
+      errorMessage = 'This field must be filled'
+    } else if (newName.length < 4) {
+      errorMessage = 'Username should be more than 4'
+    }
+
     setState((prevState) => ({
       ...prevState,
       name: newName,
-      nameErrorMessage:
-        newName === ''
-          ? 'This field must be filled'
-          : newName.length < 4
-          ? 'Username should be more than 4'
-          : '',
+      nameErrorMessage: errorMessage,
     }))
   }
 
